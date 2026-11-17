@@ -1,0 +1,184 @@
+{
+  "files": [
+    {
+      "name": "BTCUSDT-aggTrades-2024-01.zip",
+      "group": "tape",
+      "month": "2024-01",
+      "url": "https://data.binance.vision/data/spot/monthly/aggTrades/BTCUSDT/BTCUSDT-aggTrades-2024-01.zip",
+      "sha256": "6713db84b8836aec43bb52471735b2e057ed2cd8b571d7bdc81672826d8c8a19",
+      "zip_bytes": 566954365,
+      "csv_bytes": 3500996159,
+      "rows": 41962464
+    },
+    {
+      "name": "BTCUSDT-1m-2024-01.zip",
+      "group": "BTCUSDT",
+      "month": "2024-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-01.zip",
+      "sha256": "40b78258091a468f8756843f207f5913eafc1d6e756c40a78711320d93fa5e75",
+      "zip_bytes": 2169570,
+      "csv_bytes": 6699071,
+      "rows": 44640
+    },
+    {
+      "name": "ETHUSDT-1m-2024-01.zip",
+      "group": "ETHUSDT",
+      "month": "2024-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1m/ETHUSDT-1m-2024-01.zip",
+      "sha256": "2fb2c9b77365183f77e185de3578de2f3be5fefe433d7c0564f033f968d5e23c",
+      "zip_bytes": 2050101,
+      "csv_bytes": 6571961,
+      "rows": 44640
+    },
+    {
+      "name": "BTCUSDT-aggTrades-2024-02.zip",
+      "group": "tape",
+      "month": "2024-02",
+      "url": "https://data.binance.vision/data/spot/monthly/aggTrades/BTCUSDT/BTCUSDT-aggTrades-2024-02.zip",
+      "sha256": "5134af82d946b46c2be160f71d94e3ef5b0f4e8565b4211869169092ea7e5ca5",
+      "zip_bytes": 504930291,
+      "csv_bytes": 3127989543,
+      "rows": 37492760
+    },
+    {
+      "name": "BTCUSDT-1m-2024-02.zip",
+      "group": "BTCUSDT",
+      "month": "2024-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-02.zip",
+      "sha256": "431132e0db8b9fe6e5c93c8e9ba3ae37dbcfa0edcdd57618b1b78ac18d14be79",
+      "zip_bytes": 2013843,
+      "csv_bytes": 6267653,
+      "rows": 41760
+    },
+    {
+      "name": "ETHUSDT-1m-2024-02.zip",
+      "group": "ETHUSDT",
+      "month": "2024-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1m/ETHUSDT-1m-2024-02.zip",
+      "sha256": "ede3c9d4d47a5e9fdbc2e37b7086d97d4bcceec54316dd345fe0a1f8e648c443",
+      "zip_bytes": 1922719,
+      "csv_bytes": 6154706,
+      "rows": 41760
+    },
+    {
+      "name": "BTCUSDT-aggTrades-2024-03.zip",
+      "group": "tape",
+      "month": "2024-03",
+      "url": "https://data.binance.vision/data/spot/monthly/aggTrades/BTCUSDT/BTCUSDT-aggTrades-2024-03.zip",
+      "sha256": "a8422806f8ea1b32ca01500690d7e40e1a6b9192a5e63bc33a46cecaedd3e621",
+      "zip_bytes": 812423059,
+      "csv_bytes": 4980698508,
+      "rows": 59681084
+    },
+    {
+      "name": "BTCUSDT-1m-2024-03.zip",
+      "group": "BTCUSDT",
+      "month": "2024-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-03.zip",
+      "sha256": "a9af86295eae839f1d072643c67eed7fcc47bb1d82c12ef312d041eec9511e7b",
+      "zip_bytes": 2221094,
+      "csv_bytes": 6755631,
+      "rows": 44640
+    },
+    {
+      "name": "ETHUSDT-1m-2024-03.zip",
+      "group": "ETHUSDT",
+      "month": "2024-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1m/ETHUSDT-1m-2024-03.zip",
+      "sha256": "b63d885ef49b4e0f2a654ab02c5dcb502fb8abeb7300f3ebff4a33aadd3d4a82",
+      "zip_bytes": 2118386,
+      "csv_bytes": 6628255,
+      "rows": 44640
+    },
+    {
+      "name": "BTCUSDT-aggTrades-2024-04.zip",
+      "group": "tape",
+      "month": "2024-04",
+      "url": "https://data.binance.vision/data/spot/monthly/aggTrades/BTCUSDT/BTCUSDT-aggTrades-2024-04.zip",
+      "sha256": "2ec052570a4665e386c55b607856f5c6650e2212bd5b4a216836edf8effca4d8",
+      "zip_bytes": 598656631,
+      "csv_bytes": 3757098234,
+      "rows": 44987078
+    },
+    {
+      "name": "BTCUSDT-1m-2024-04.zip",
+      "group": "BTCUSDT",
+      "month": "2024-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-04.zip",
+      "sha256": "753040cbfaa72bf9b1fdc6253a3b521a9a174a664dfd0929a556be327b016bc6",
+      "zip_bytes": 2120723,
+      "csv_bytes": 6493578,
+      "rows": 43200
+    },
+    {
+      "name": "ETHUSDT-1m-2024-04.zip",
+      "group": "ETHUSDT",
+      "month": "2024-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1m/ETHUSDT-1m-2024-04.zip",
+      "sha256": "9c6ef16ea4e0593ac4547d2f6c64c272d8f39806871473c4877885af47a67b88",
+      "zip_bytes": 2016825,
+      "csv_bytes": 6373889,
+      "rows": 43200
+    },
+    {
+      "name": "BTCUSDT-aggTrades-2024-05.zip",
+      "group": "tape",
+      "month": "2024-05",
+      "url": "https://data.binance.vision/data/spot/monthly/aggTrades/BTCUSDT/BTCUSDT-aggTrades-2024-05.zip",
+      "sha256": "ddca1ae99be8085ee0698c8fc7aa76bcc64be1bc8e4f9b79cf07216d214d5069",
+      "zip_bytes": 428790217,
+      "csv_bytes": 2672132533,
+      "rows": 32019547
+    },
+    {
+      "name": "BTCUSDT-1m-2024-05.zip",
+      "group": "BTCUSDT",
+      "month": "2024-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-05.zip",
+      "sha256": "0f709143f66a09acc430d24a5f27f9accd52689c23ce10f2c0b6ea26997bfa8a",
+      "zip_bytes": 2144250,
+      "csv_bytes": 6673369,
+      "rows": 44640
+    },
+    {
+      "name": "ETHUSDT-1m-2024-05.zip",
+      "group": "ETHUSDT",
+      "month": "2024-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1m/ETHUSDT-1m-2024-05.zip",
+      "sha256": "4e09e26b7a2b352d24c25f6fc6cdd531d167d460a48226e4a8080413e0bb5e66",
+      "zip_bytes": 2054099,
+      "csv_bytes": 6559735,
+      "rows": 44640
+    },
+    {
+      "name": "BTCUSDT-aggTrades-2024-06.zip",
+      "group": "tape",
+      "month": "2024-06",
+      "url": "https://data.binance.vision/data/spot/monthly/aggTrades/BTCUSDT/BTCUSDT-aggTrades-2024-06.zip",
+      "sha256": "9d1974850dfc5545156c1b95462cb6103962f609b65d156d605914395d8c7036",
+      "zip_bytes": 353905374,
+      "csv_bytes": 2317901627,
+      "rows": 27774325
+    },
+    {
+      "name": "BTCUSDT-1m-2024-06.zip",
+      "group": "BTCUSDT",
+      "month": "2024-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1m/BTCUSDT-1m-2024-06.zip",
+      "sha256": "90f4fc3f55918787848c71f4cd0f2f1a5851bbffaf6392e76e9ab555b7479d2b",
+      "zip_bytes": 2018857,
+      "csv_bytes": 6436366,
+      "rows": 43200
+    },
+    {
+      "name": "ETHUSDT-1m-2024-06.zip",
+      "group": "ETHUSDT",
+      "month": "2024-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1m/ETHUSDT-1m-2024-06.zip",
+      "sha256": "27040862f050687c6da296108dfcfb29e0500e0f9c8dd73669146e9e68a128c0",
+      "zip_bytes": 1945704,
+      "csv_bytes": 6319911,
+      "rows": 43200
+    }
+  ]
+}

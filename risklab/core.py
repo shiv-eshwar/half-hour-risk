@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import NamedTemporaryFile
@@ -20,6 +21,7 @@ START, APR, MAY, END = map(epoch, ("2024-01-01", "2024-04-01", "2024-05-01", "20
 
 
 def spark_session(stage):
+    os.environ.setdefault("PYSPARK_PYTHON", sys.executable)
     spark = (SparkSession.builder.appName(f"half-hour-risk-{stage}")
              .master(os.environ.get("SPARK_MASTER", "local[4]"))
              .config("spark.sql.session.timeZone", "UTC")

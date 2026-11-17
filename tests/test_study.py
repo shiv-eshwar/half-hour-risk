@@ -1,7 +1,6 @@
 import math
 import unittest
 
-import numpy as np
 from pyspark.sql import functions as F
 
 from risklab.core import START, moments, spark_session, trade_values
