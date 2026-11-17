@@ -14,6 +14,7 @@ A separate rebuild from the 18 verified source archives reproduced every held-ou
 
 | Document | What it answers |
 | --- | --- |
+| [Team 7 presentation (PowerPoint)](output/presentation/half-hour-risk.pptx) | Sixteen slides with speaker notes, worked forecast cases and Spark performance results |
 | [Submission report (PDF)](output/pdf/half-hour-risk.pdf) | Six-page report with the methods, held-out results, literature and distributed execution evidence |
 | [Technical report](report.md) | What was measured, which model performed best and how much the tape added |
 | [Project brief](whatthis.md) | Business decision, novelty, limits and mapping to all 30 assessment marks |

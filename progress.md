@@ -25,3 +25,5 @@ In a separate checkout, acquisition rechecked the 18 cached source ZIPs against 
 The raw-data forecast command reproduced the first held-out decision, the first alert and the largest miss. It also scored 2024-07-01 00:00 UTC at 0.002686 versus the 0.301167 alert cutoff using observations through June. Its target interval is outside the study archive. [Boundary forecast](results/archive-boundary-forecast.json)
 
 The six-page submission report was typeset and visually checked with all tables and the precision–recall figure. [Submission report](output/pdf/half-hour-risk.pdf)
+
+Team 7’s [presentation](output/presentation/half-hour-risk.pptx) follows the course sample and includes the trade-size example, forecast clock, held-out model comparison, two market cases, measured scaling and streaming replay.
