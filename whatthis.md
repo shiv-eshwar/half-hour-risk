@@ -25,6 +25,14 @@ The contribution is a controlled test of the extra data's value. At the same tim
 3. Does any improvement hold in both calm and active conditions as measured before the forecast, and how large is the day-to-day uncertainty?
 4. How much work does Spark do to turn six unsplittable monthly trade ZIPs into minute statistics? Can an event-time replay with a checkpoint produce those same statistics?
 
+## What the experiment found
+
+Spark processed **243,917,258 aggregate trades** representing 311,557,031 underlying fills. The reconstructed BTC tape agreed with the exchange on all 262,080 minutes. Eight pipelines were fitted on early-2024 data and tuned on April. The held-out months contained 83 stressed half-hours among 2,928 decisions.
+
+The selected logistic model with trade features achieved AP **0.2162**, compared with **0.2076** for the same model using bars and **0.1772** for volatility persistence. At the calibrated cutoffs, the tape model caught 23 events with 62 false warnings. Bars alone caught 24 with 65 false warnings. The lower end of the paired uncertainty interval was essentially zero. This is a modest improvement in ranking with a measurable data cost. [Results and interpretation](report.md)
+
+For the viva, `scripts/run demo` loads the published Spark model and reproduces a correct warning and the largest missed event. A separate checkpointed replay verified event-time aggregations on real trades. The four-thread Spark job aggregated all six months in a median 43.44 seconds after warm-up. A second experiment distributed January tasks across two executor processes on the same machine. [Engineering guide](engineering.md) · [Viva walkthrough](viva.md)
+
 ## Fit to the 30-mark assessment
 
 | Component | Marks | Evidence |

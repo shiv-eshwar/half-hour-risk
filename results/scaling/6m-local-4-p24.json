@@ -1,0 +1,35 @@
+{
+  "months": 6,
+  "master": "local[4]",
+  "input_partitions": 47,
+  "shuffle_partitions": 24,
+  "adaptive_execution": false,
+  "spark_version": "3.5.3",
+  "architecture": "arm64",
+  "cpu": "arm",
+  "os": "Darwin",
+  "host_logical_cpus": 10,
+  "parquet_bytes": 6011225797,
+  "executors": [
+    {
+      "id": "driver",
+      "cores": 4,
+      "completed_tasks": 294
+    }
+  ],
+  "warmups": 1,
+  "seconds": [
+    43.85542333400008,
+    43.148570250000375,
+    43.441621250000026
+  ],
+  "median_seconds": 43.441621250000026,
+  "minutes": 262080,
+  "prints": 243917258,
+  "native_fills": 311557031,
+  "last_price": 15605395071.499983,
+  "tape_quote": 423512147789.8348,
+  "tape_buy_quote": 211681241050.49792,
+  "sum_sq": 2.233903226424253e+16,
+  "sum_signed_sq": 1049814856209233.5
+}

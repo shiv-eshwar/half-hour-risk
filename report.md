@@ -59,6 +59,23 @@ April selected L2 regularization 0.01 for both logistic models and depth 2 for b
 
 These examples illustrate persistence and the difficulty of anticipating a sudden change. Each case includes all input values and can be re-scored by loading the published model. [Cases](results/case_studies.json) · [MLlib model](results/selected-model.zip)
 
+## Spark scalability
+
+Each cell below is the median of three timed runs after one warm-up. The action reads the typed Bitcoin trade partitions, applies validity filters, aggregates by minute and consumes every output moment. Timing excludes download, CSV conversion, JVM startup, ML fitting and replay. The host was an Apple M5 with 10 logical CPUs and 16 GiB of memory. The OS file cache was warm and Spark adaptive coalescing was disabled. [Benchmark implementation](risklab/systems.py) · [Raw timings and executor counters](results/scaling)
+
+| Input | Aggregate trades | Execution | Input / shuffle partitions | Median seconds |
+| --- | ---: | --- | ---: | ---: |
+| January | 41,962,464 | 1 local thread | 8 / 24 | 9.40 |
+| January | 41,962,464 | 4 local threads | 8 / 24 | 8.42 |
+| January | 41,962,464 | 4 local threads | 8 / 8 | 7.61 |
+| January–March | 139,136,308 | 4 local threads | 27 / 24 | 25.21 |
+| January–June | 243,917,258 | 4 local threads | 47 / 24 | 43.44 |
+| January | 41,962,464 | 2 executor JVMs, 1 core each on one host | 8 / 24 | 9.84 |
+
+At 24 shuffle partitions, increasing the January run from one to four threads gave a **1.12×** speedup. Reducing the four-thread run to eight shuffle partitions cut the January median by **9.5%**. January provided only eight input partitions. Wider scheduling and additional small shuffle tasks carry overhead at that size. The similar full-scale configuration handled **5.61 million aggregate trades per second**, with a 5.81× increase in rows from January to the half-year and a 5.16× increase in runtime.
+
+In the two-worker run the driver completed zero tasks, and the two executor JVMs completed **70 and 63 tasks** across the warm-up and measured actions. The minute count and underlying fill total agreed across January configurations. This demonstrates execution across separate worker processes. A multi-host network-speedup estimate would require physically separate machines. [Two-worker run](results/scaling/1m-local-cluster-2-1-1024-p24.json)
+
 ## Streaming verification
 
 The 11 January replay passed **314,003** real aggregate trades through Spark Structured Streaming. A deterministic delay sent **2,959** events to a later delivery batch. In the 60 minutes evaluated, all **304,952** prints reconciled to the original batch aggregation. Counts and closing prices agreed exactly, and the largest scaled error in the floating moments was 2.085 × 10⁻¹⁴. The three query starts consumed 99,751, 214,252 and zero input rows, respectively. A three-minute buffer allowed the final evaluated window to close. [Checkpoint and watermark evidence](results/streaming.json)

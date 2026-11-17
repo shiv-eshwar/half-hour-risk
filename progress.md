@@ -1,6 +1,6 @@
 # Project progress
 
-The dated entries refer to 18 November 2026 in the project workspace. The market-data timestamps and experiment boundaries use UTC.
+**Complete and publicly reproducible.** The study, model comparison, execution measurements, report and viva demo were completed on 18 November 2026 in the project workspace. The market-data timestamps and experiment boundaries use UTC.
 
 | Milestone | Result | Evidence |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ The dated entries refer to 18 November 2026 in the project workspace. The market
 | Evaluation | Scored all 2,928 held-out windows. The tape logistic model reached AP 0.2162. Its matched bars-only fit reached 0.2076. Published the per-window values and an independent metric check. | [Holdout](results/holdout.json) · [Forecast ledger](results/forecasts.csv.gz) · [Metric check](tests/test_published_results.py) |
 | Streaming | Processed 314,003 real prints including a closing buffer, verified all 60 target minutes against batch and consumed zero additional input on the final checkpoint restart. | [Query progress](results/streaming.json) |
 | Demonstration | Loaded the published MLlib model and regenerated the first held-out alert and the largest missed event from their feature vectors. | [Model](results/selected-model.zip) · [Cases](results/case_studies.json) |
-| Scaling | Completed the one-month single-host thread and shuffle comparisons. Larger volume and two-worker measurements are running. | [Timing records](results/scaling) |
+| Scaling | Completed six timing configurations. Four local threads aggregated all six months in a median 43.44 seconds. Two executor JVMs on the same host completed 70 and 63 tasks in the January run. | [Timing records](results/scaling) |
+| Fresh-clone verification | Created a new environment from the public repository, installed the pinned core requirements, reproduced both demonstration scores without raw market data and passed all five tests. | [Demo code](risklab/demo.py) · [Test suite](tests) |
 
 The [technical report](report.md) interprets the AP gain, false-alert burden and cases. Each major milestone has a public commit. [Project history](https://github.com/shiv-eshwar/half-hour-risk/commits/main/)
