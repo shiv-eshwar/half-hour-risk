@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+SPARK_MASTER='local[1]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 1
+SPARK_MASTER='local[4]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 1
+SPARK_MASTER='local[4]' SHUFFLE_PARTITIONS=8 scripts/run benchmark --months 1
+SPARK_MASTER='local[4]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 3
+SPARK_MASTER='local[4]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 6
+SPARK_LOCAL_IP=127.0.0.1 SPARK_MASTER='local-cluster[2,1,1024]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 1

@@ -41,17 +41,26 @@ def write_json(path, data):
 
 
 def read_tape(spark, months=6):
-    files = [str(PARQUET / "tape" / f"2024-{month:02}.parquet") for month in range(1, months + 1)]
-    tape = spark.read.parquet(*files).withColumn("month", F.regexp_extract(
-        F.input_file_name(), r"(2024-\d{2})\.parquet", 1))
+    # Attach source-month bounds once per file so row validation uses integer comparisons.
+    parts = []
+    for month in range(1, months + 1):
+        date = f"2024-{month:02}"
+        lo = epoch(f"{date}-01") * 1000
+        hi = epoch(f"2024-{month + 1:02}-01") * 1000
+        part = (spark.read.parquet(str(PARQUET / "tape" / f"{date}.parquet"))
+                .withColumn("month", F.lit(date))
+                .withColumn("wrong_month", ~F.col("ms").between(lo, hi - 1)))
+        parts.append(part)
+    tape = parts[0]
+    for part in parts[1:]:
+        tape = tape.unionByName(part)
     required = ["ms", "price", "qty", "agg_id", "first_id", "last_id", "buyer_maker"]
     missing = F.lit(False)
     for name in required:
         missing = missing | F.col(name).isNull()
-    wrong_month = F.date_format(F.timestamp_millis("ms"), "yyyy-MM") != F.col("month")
     invalid_number = (F.isnan("price") | F.isnan("qty") | (F.col("price") <= 0) | (F.col("qty") <= 0)
                       | (F.col("price") == float("inf")) | (F.col("qty") == float("inf")))
-    status = (F.when(missing, "missing").when(wrong_month, "wrong_month")
+    status = (F.when(missing, "missing").when(F.col("wrong_month"), "wrong_month")
               .when(invalid_number, "invalid_price_or_size")
               .when((F.col("agg_id") < 0) | (F.col("first_id") < 0) |
                     (F.col("last_id") < F.col("first_id")), "invalid_ids").otherwise("accepted"))

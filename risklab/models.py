@@ -13,6 +13,7 @@ from pyspark.ml.functions import vector_to_array
 from pyspark.sql import functions as F
 
 from .core import MAY, END, RESULTS, RUN, SEED, write_json
+from .demo import package_model
 from .evaluate import alert_cutoff, average_precision, paired_days, summarize
 from .panel import BARS, TAPE
 
@@ -85,6 +86,7 @@ def train(spark):
         "settings": settings, "validation": val, "best_by_family": by_family,
         "selected_tape": full, "selected_bars": bars, "matched_twin": twin})
 
+    package_model(dest / full)
     test = data.filter("split='test'").cache()
     test_rows = test.orderBy("issue_s").collect()
     issue = np.array([r.issue_s for r in test_rows])

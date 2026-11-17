@@ -5,7 +5,7 @@ from .core import spark_session
 
 def main():
     args = argparse.ArgumentParser(description="Half-Hour Risk experiment")
-    args.add_argument("stage", choices=["prepare", "train", "replay", "benchmark"])
+    args.add_argument("stage", choices=["prepare", "train", "replay", "benchmark", "demo"])
     args.add_argument("--months", type=int, choices=range(1, 7), default=1)
     opts = args.parse_args()
     spark = spark_session(opts.stage)
@@ -16,6 +16,9 @@ def main():
         elif opts.stage == "train":
             from .models import train
             train(spark)
+        elif opts.stage == "demo":
+            from .demo import demo
+            demo(spark)
         elif opts.stage == "replay":
             from .systems import replay
             replay(spark)

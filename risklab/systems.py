@@ -38,12 +38,18 @@ def benchmark(spark, months):
     tag = "".join(c if c.isalnum() else "-" for c in master).strip("-")
     physical_bytes = sum((PARQUET / "tape" / f"2024-{m:02}.parquet").stat().st_size
                          for m in range(1, months + 1))
+    stored = spark.sparkContext._jsc.sc().statusStore().executorList(True)
+    executors = []
+    for i in range(stored.size()):
+        executor = stored.apply(i)
+        executors.append({"id": executor.id(), "cores": executor.totalCores(),
+                          "completed_tasks": executor.completedTasks()})
     write_json(RESULTS / "scaling" / f"{months}m-{tag}-p{parts}.json",
                {"months": months, "master": master, "input_partitions": input_partitions,
                 "shuffle_partitions": parts, "adaptive_execution": False, "spark_version": spark.version,
                 "architecture": platform.machine(), "cpu": platform.processor(), "os": platform.system(),
                 "host_logical_cpus": os.cpu_count(), "parquet_bytes": physical_bytes,
-                "warmups": 1, "seconds": times, "median_seconds": statistics.median(times), **check})
+                "executors": executors, "warmups": 1, "seconds": times, "median_seconds": statistics.median(times), **check})
 
 
 def replay(spark):

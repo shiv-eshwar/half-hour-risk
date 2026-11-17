@@ -1,7 +1,29 @@
 # Half-Hour Risk
 
-**Can the concentration of aggressive Bitcoin trades flag an unusually volatile half-hour before it begins?**
+**Can the distribution of large, aggressive Bitcoin trades help a risk desk anticipate an unusually volatile half-hour?**
 
-A quantitative finance study of BTC/USDT spot trades on Binance from January through June 2024. Apache Spark aggregates the full trade tape. Spark MLlib compares volatility persistence, logistic regression and gradient-boosted trees. The experiment measures whether trade-level size and direction add warning value beyond ordinary minute bars from Bitcoin and Ethereum.
+A quantitative finance end-semester project using **243,917,258 Binance BTC/USDT spot aggregate trades**, six months of BTC and ETH minute bars, Apache Spark MLlib and Structured Streaming. At every UTC half-hour boundary, the model scores the next thirty minutes for unusual realized variance. The matched comparison tests whether trade-level information buys a better warning than ordinary bars alone. [Project brief](whatthis.md)
 
-Data and the question are fixed before looking at held-out results. The intended use is market-risk monitoring. [Binance public archive](https://github.com/binance/binance-public-data)
+## Read the project
+
+| Document | What it answers |
+| --- | --- |
+| [Technical report](report.md) | What was measured, which model performed best and how much the tape added |
+| [Project brief](whatthis.md) | Business decision, novelty, limits and mapping to all 30 assessment marks |
+| [Literature](literature.md) | Closest Bitcoin volatility studies and the research gap |
+| [Final datasets](datasets.md) | Exact dates, row counts, fields, download links and publisher checksums |
+| [Experiment plan](plan.md) | Frozen train/validation/test periods, label, ablation and alert policy |
+| [Architecture](architecture.md) | Spark data flow, event clock and feature equations |
+| [Engineering](engineering.md) | Reproduction commands, quality rules, scalability and streaming |
+| [Progress](progress.md) | Completed milestones and supporting evidence |
+| [Viva walkthrough](viva.md) | Five-minute demonstration and likely examiner questions |
+
+## Run the demonstration
+
+Install a Java 17 JDK, Python 3.11 and uv. From the repository root, run the commands below. The demonstration loads the small published Spark pipeline and re-scores two held-out cases. The full source archives are required only for rebuilding the study. [Full reproduction](engineering.md)
+
+```bash
+uv venv --python 3.11
+uv pip install -r requirements.txt
+scripts/run demo
+```

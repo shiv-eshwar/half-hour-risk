@@ -23,6 +23,7 @@ The acquisition command verifies every compressed file against the publisher and
 | prepare | Normalized Parquet and source manifest | Minute statistics in runs/tape_minutes, forecast panel in runs/panel and results/data_quality.json |
 | train | Forecast panel | Fitted Spark PipelineModels in runs/models, validation choices, holdout metrics, cases and compressed per-window forecasts in results |
 | replay | January BTC tape | A fresh run directory for the inbox, state checkpoint and Parquet sink, plus results/streaming.json |
+| demo | Published model ZIP and case feature vectors | Recomputed MLlib scores for use in the viva |
 | benchmark | The first N normalized tape months | One timing record per input-size, local-thread and shuffle combination in results/scaling |
 
 A rerun of a batch stage rebuilds its derived tables. Run dependent stages in order and give each active run its own checkout/output directory. The raw archives and large derived tables stay on local disk. Publishing the small forecast ledger allows independent evaluation without downloading the raw tape.
@@ -50,7 +51,7 @@ SPARK_MASTER='local[4]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 3
 SPARK_MASTER='local[4]' SHUFFLE_PARTITIONS=24 scripts/run benchmark --months 6
 ```
 
-Each process performs one warm-up and three measured projected scans, filters and aggregations. A terminal action consumes all moment columns, including the closing price. Adaptive coalescing is disabled for the timing experiment. Local data may be in the OS file cache. Each result records Spark version, input partitions, shuffle partitions, logical CPUs, physical Parquet bytes and all timings. For a standalone Spark cluster, use its master URL in SPARK_MASTER and mount the project and data at the same absolute paths on driver and workers. Cluster execution also requires a compatible Python runtime on each node.
+Run `scripts/benchmarks` to execute these settings plus a one-month same-host Spark cluster with two executor workers. Each process performs one warm-up and three measured projected scans, filters and aggregations. A terminal action consumes all moment columns, including the closing price. Adaptive coalescing is disabled for the timing experiment. Local data may be in the OS file cache. Each result records Spark version, input partitions, shuffle partitions, logical CPUs, physical Parquet bytes and all timings. For a standalone Spark cluster, use its master URL in SPARK_MASTER and mount the project and data at the same absolute paths on driver and workers. Cluster execution also requires a compatible Python runtime on each node.
 
 The replay takes 60 minutes of real January trades plus a three-minute closing buffer. One in eleven IDs gets a synthetic 45-second delivery delay. Five-minute delivery batches arrive as separate Parquet files. Spark groups by original one-minute event windows, applies a two-minute watermark and persists state. The query stops between two file groups and restarts on the same checkpoint, followed by a no-input restart. Integer values and last prices must agree exactly with the batch reference. Relative errors in floating moments must stay below 1e−8. [Systems code](risklab/systems.py)
 
@@ -60,4 +61,4 @@ The replay takes 60 minutes of real January trades plus a three-minute closing b
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-Set JAVA_HOME first when Java is outside the system search path. Tests cover average-precision ties, identical paired predictions, taker direction, equal ordinary bars with different squared moments, future-label isolation, and gaps in a future return window. Cross-checks against the complete published BTC kline archive and the replay supplement these fixtures.
+Set JAVA_HOME first when Java is outside the system search path. Tests cover average-precision ties, identical paired predictions, taker direction, equal ordinary bars with different squared moments, future-label isolation, and gaps in a future return window. To regenerate the report figure, install matplotlib 3.9.4 in the same environment and run `.venv/bin/python scripts/plot_results.py`. Cross-checks against the complete published BTC kline archive and the replay supplement these fixtures.
