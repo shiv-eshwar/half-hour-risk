@@ -1,0 +1,13 @@
+.firecrawl/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+data/
+runs/
+artifacts/
+spark-warehouse/
+.sparkStaging/
+metastore_db/
+derby.log
