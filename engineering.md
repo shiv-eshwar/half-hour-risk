@@ -15,7 +15,7 @@ SHUFFLE_PARTITIONS=8 scripts/run replay
 
 The acquisition command verifies every compressed file against the publisher and [pinned manifest](sources/manifest.json). It reuses verified inputs, stages new downloads under temporary names and atomically renames completed files. A changed publisher digest stops acquisition. The optional manifest-recording flag is for creating a new study snapshot. A source revision calls for a new recorded experiment.
 
-After the environment setup, `scripts/reproduce` runs acquisition, preparation, training, replay, all six benchmarks, figure generation, both forms of model demonstration and the regression tests. The script writes artifacts to the current checkout. Use a separate checkout when comparing a new run with the published reference.
+After the environment setup, `scripts/reproduce` runs acquisition, preparation, training, replay, all six benchmarks, figure and PDF generation, both forms of model demonstration and the regression tests. The script writes artifacts to the current checkout. Use a separate checkout when comparing a new run with the published reference.
 
 ## Forecast directly from market records
 
@@ -78,3 +78,5 @@ The replay takes 60 minutes of real January trades plus a three-minute closing b
 Set JAVA_HOME first when Java is outside the system search path. The published-ledger test reconstructs the confusion counts and AP for every held-out candidate. Additional tests cover average-precision ties, identical paired predictions, taker direction, equal ordinary bars with different squared moments, future-label isolation, and gaps in a future return window. To regenerate the report figure, install matplotlib 3.9.4 in the same environment and run `.venv/bin/python scripts/plot_results.py`. Cross-checks against the complete published BTC kline archive and the replay supplement these fixtures.
 
 The printable submission report is built from the Markdown study, literature review, feature definitions and published figure. Regenerate it with `uv run --script scripts/build_report.py`. [Submission PDF](output/pdf/half-hour-risk.pdf)
+
+To check two completed runs, use `.venv/bin/python scripts/compare_runs.py results /path/to/rebuilt/results`. It compares source quality, model selection, metrics, every score and cutoff decision, streaming outputs, and the six benchmark workloads. Timing medians are reported separately for the rebuilt run.

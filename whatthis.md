@@ -31,6 +31,8 @@ Spark processed **243,917,258 aggregate trades** representing 311,557,031 underl
 
 The selected logistic model with trade features achieved AP **0.2162**, compared with **0.2076** for the same model using bars and **0.1772** for volatility persistence. At the calibrated cutoffs, the tape model caught 23 events with 62 false warnings. Bars alone caught 24 with 65 false warnings. The lower end of the paired uncertainty interval was essentially zero. This is a modest improvement in ranking with a measurable data cost. [Results and interpretation](report.md)
 
+The [six-page submission report](output/pdf/half-hour-risk.pdf) brings the research, methods, results and execution measurements together.
+
 For the viva, `scripts/run demo` loads the published Spark model and reproduces a correct warning and the largest missed event. A separate checkpointed replay verified event-time aggregations on real trades. The four-thread Spark job aggregated all six months in a median 43.44 seconds after warm-up. A second experiment distributed January tasks across two executor processes on the same machine. [Engineering guide](engineering.md) · [Viva walkthrough](viva.md)
 
 ## Fit to the 30-mark assessment

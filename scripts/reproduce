@@ -10,6 +10,7 @@ scripts/run train
 SHUFFLE_PARTITIONS=8 scripts/run replay
 scripts/benchmarks
 uv run --no-project --python .venv/bin/python --with matplotlib==3.9.4 --with numpy==1.26.4 scripts/plot_results.py
+uv run --script scripts/build_report.py
 scripts/run demo
 scripts/run predict --at 2024-07-01T00:00Z
 .venv/bin/python -m unittest discover -s tests -v
