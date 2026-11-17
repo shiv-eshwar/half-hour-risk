@@ -16,3 +16,12 @@
 | Fresh-clone verification | Created a new environment from the public repository, installed the pinned core requirements, reproduced both demonstration scores without raw market data and passed all five tests. | [Demo code](risklab/demo.py) · [Test suite](tests) |
 
 The [technical report](report.md) interprets the AP gain, false-alert burden and cases. Each major milestone has a public commit. [Project history](https://github.com/shiv-eshwar/half-hour-risk/commits/main/)
+
+
+## End-to-end rebuild
+
+In a separate checkout, acquisition rechecked the 18 cached source ZIPs against the exchange and pinned SHA-256 values, then regenerated the typed Parquet files. Spark rebuilt the feature panel, refitted all eight candidates, repeated the replay and all six benchmarks, and regenerated the figure and model. Every test label and alert decision agreed across all 2,928 forecast times. The largest absolute score difference was 4.45 × 10⁻¹⁵ or less. The source audit, validation selection, paired bootstrap and regime comparisons passed the cross-run checks. All six regression tests passed. [Machine-readable comparison](results/reproduction.json)
+
+The raw-data forecast command reproduced the first held-out decision, the first alert and the largest miss. It also scored 2024-07-01 00:00 UTC at 0.002686 versus the 0.301167 alert cutoff using observations through June. Its target interval is outside the study archive. [Boundary forecast](results/archive-boundary-forecast.json)
+
+The six-page submission report was typeset and visually checked with all tables and the precision–recall figure. [Submission report](output/pdf/half-hour-risk.pdf)

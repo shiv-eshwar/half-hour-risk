@@ -79,4 +79,4 @@ Set JAVA_HOME first when Java is outside the system search path. The published-l
 
 The printable submission report is built from the Markdown study, literature review, feature definitions and published figure. Regenerate it with `uv run --script scripts/build_report.py`. [Submission PDF](output/pdf/half-hour-risk.pdf)
 
-To check two completed runs, use `.venv/bin/python scripts/compare_runs.py results /path/to/rebuilt/results`. It compares source quality, model selection, metrics, every score and cutoff decision, streaming outputs, and the six benchmark workloads. Timing medians are reported separately for the rebuilt run.
+To check two completed runs, use `.venv/bin/python scripts/compare_runs.py results /path/to/rebuilt/results`. It compares source quality, model selection, metrics, every score and cutoff decision, streaming outputs, and the six benchmark workloads. Timing medians are reported separately for the rebuilt run. The Markdown report and its printable edition retain the measurements from the original reference run.

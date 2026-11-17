@@ -1,0 +1,14 @@
+{
+  "matched_forecast_windows": 2928,
+  "selected_model": "tape_logistic_0.01",
+  "matched_average_precision": 0.21620104186158526,
+  "largest_absolute_forecast_score_difference": 4.440892098500626e-15,
+  "rebuild_median_seconds_by_configuration": {
+    "1m-local-1-p24.json": 7.9332899159999215,
+    "1m-local-4-p24.json": 5.077974707999601,
+    "1m-local-4-p8.json": 5.998815083000409,
+    "1m-local-cluster-2-1-1024-p24.json": 8.850272167000185,
+    "3m-local-4-p24.json": 20.004870791999565,
+    "6m-local-4-p24.json": 37.692605291999826
+  }
+}

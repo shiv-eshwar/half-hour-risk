@@ -6,6 +6,8 @@ A quantitative finance end-semester project using **243,917,258 Binance BTC/USDT
 
 The tape model scored **0.2162 average precision** on May–June, compared with **0.2076** for the same logistic model using bars alone and **0.1772** for volatility persistence. With cutoffs fixed in April, the tape model caught 23 of 83 stress windows and raised 62 false alarms. Bars alone caught 24 and raised 65 false alarms. [Results and uncertainty](report.md)
 
+A separate rebuild from the 18 verified source archives reproduced every held-out alert decision. [Reproduction results](results/reproduction.json)
+
 ![Held-out precision–recall comparison](results/precision-recall.png)
 
 ## Read the project

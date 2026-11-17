@@ -76,6 +76,8 @@ At 24 shuffle partitions, increasing the January run from one to four threads ga
 
 In the two-worker run the driver completed zero tasks, and the two executor JVMs completed **70 and 63 tasks** across the warm-up and measured actions. The minute count and underlying fill total agreed across January configurations. This demonstrates execution across separate worker processes. A multi-host network-speedup estimate would require physically separate machines. [Two-worker run](results/scaling/1m-local-cluster-2-1-1024-p24.json)
 
+An independent rebuild repeated all six workloads. It aggregated the half-year in 37.69 seconds. On January data with four threads, 24 shuffle partitions took 5.08 seconds and eight took 6.00 seconds. The faster setting changed between runs on the same host. [Rebuild comparison](results/reproduction.json)
+
 ## Streaming verification
 
 The 11 January replay passed **314,003** real aggregate trades through Spark Structured Streaming. A deterministic delay sent **2,959** events to a later delivery batch. In the 60 minutes evaluated, all **304,952** prints reconciled to the original batch aggregation. Counts and closing prices agreed exactly, and the largest scaled error in the floating moments was 2.085 × 10⁻¹⁴. The three query starts consumed 99,751, 214,252 and zero input rows, respectively. A three-minute buffer allowed the final evaluated window to close. [Checkpoint and watermark evidence](results/streaming.json)
