@@ -1,13 +1,17 @@
 # Project progress
 
-| Milestone | Status and evidence |
-| --- | --- |
-| Finance topic and public repository | Defined the risk-monitoring question and published the project on 18 November 2026. [Repository](https://github.com/shiv-eshwar/half-hour-risk) |
-| Sources and empirical design | Verified the official aggregate-trade and minute-bar inventories and field definitions. Fixed periods, label, comparator, feature ablation and selection rules before fitting. [Experiment protocol](plan.md) |
-| Acquisition and execution | The full six-month experiment is in progress. Measured counts and results will be added as the stages complete. |
+The dated entries refer to 18 November 2026 in the project workspace. The market-data timestamps and experiment boundaries use UTC.
 
-### Verified runs on 18 November 2026
+| Milestone | Result | Evidence |
+| --- | --- | --- |
+| Finance topic and protocol | Fixed the market-risk question, 30-minute target, 90th-percentile event definition, chronological split, model grid and matched ablation before fitting. | [Protocol commit](https://github.com/shiv-eshwar/half-hour-risk/commit/e64c227) |
+| Literature and data selection | Verified the closest Bitcoin forecasting studies and selected two public exchange products across BTC and ETH. | [Literature](literature.md) · [Data card](datasets.md) |
+| Acquisition | Verified 18 publisher checksums, normalized 243,917,258 aggregate trades and 524,160 minute bars, then repeated acquisition against the pinned snapshot. | [Source manifest](sources/manifest.json) |
+| Preprocessing | All 262,080 BTC minutes reconciled. The original and optimized Spark preparation runs produced identical data-quality summaries and split sizes. | [Executed audit](results/data_quality.json) |
+| MLlib | Fitted eight Spark pipelines. April selected logistic regularization 0.01 for both feature sets, and depth 2 for both boosted-tree models. | [Validation record](results/validation.json) |
+| Evaluation | Scored all 2,928 held-out windows. The tape logistic model reached AP 0.2162. Its matched bars-only fit reached 0.2076. Published the per-window values and an independent metric check. | [Holdout](results/holdout.json) · [Forecast ledger](results/forecasts.csv.gz) · [Metric check](tests/test_published_results.py) |
+| Streaming | Processed 314,003 real prints including a closing buffer, verified all 60 target minutes against batch and consumed zero additional input on the final checkpoint restart. | [Query progress](results/streaming.json) |
+| Demonstration | Loaded the published MLlib model and regenerated the first held-out alert and the largest missed event from their feature vectors. | [Model](results/selected-model.zip) · [Cases](results/case_studies.json) |
+| Scaling | Completed the one-month single-host thread and shuffle comparisons. Larger volume and two-worker measurements are running. | [Timing records](results/scaling) |
 
-- All 18 publisher checksums passed. The six tape files contain 243,917,258 aggregate trades. Each of the two minute-bar series has 262,080 records. [Source manifest](sources/manifest.json)
-- Four regression tests passed, including a future-price shock that changes the target while leaving every input feature identical. [Tests](tests/test_study.py)
-- A Structured Streaming replay consumed 314,003 real aggregate prints across a 63-minute input interval. Of these, 2,959 were delivered in a later synthetic file batch. All 60 evaluated minute windows agreed with batch on counts and last price. The largest scaled floating-moment discrepancy was 2.09 × 10⁻¹⁴ or less. The same-checkpoint no-input restart consumed zero new rows. [Query progress](results/streaming.json)
+The [technical report](report.md) interprets the AP gain, false-alert burden and cases. Each major milestone has a public commit. [Project history](https://github.com/shiv-eshwar/half-hour-risk/commits/main/)

@@ -46,6 +46,8 @@ April selected L2 regularization 0.01 for both logistic models and depth 2 for b
 
 **Uncertainty.** The paired logistic AP increment was **+0.00863**. The 95% percentile interval from 2,000 paired resamples of the 61 UTC days was **+0.000005 to +0.01894**. Its lower end is effectively zero. The estimate supports a small ranking gain during this holdout. Sixty-one days on one venue provide limited evidence about its persistence in another market regime. [Per-window predictions](results/forecasts.csv.gz) · [Bootstrap and slice results](results/holdout.json)
 
+**Cost of the signal.** The twelve ordinary BTC and ETH bar archives total 24.80 MB. Adding the Bitcoin tape raises the compressed input to 3.29 GB, about 133 times the bars-only volume. That extra input bought 0.00863 AP on this holdout. At the frozen cutoff it saved three false alerts over 61 days and caught one fewer event. This places a concrete cost and benefit next to the modeling result. [Archive sizes](datasets.md)
+
 **Regimes.** The calm slice, defined by trailing 24-hour variance at issue time, contained 41 events in 2,265 windows. Tape and matched bars scored AP 0.1371 and 0.1333 there. The active slice contained 42 events in just 663 windows, with corresponding APs of 0.2992 and 0.2864. Prevalence differs across slices, so compare model pairs within a slice.
 
 ## Two decisions from the test set

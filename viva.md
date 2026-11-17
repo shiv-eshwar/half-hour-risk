@@ -22,7 +22,7 @@
 
 **How did you use Spark?** The driver constructs the job and coordinates execution. Spark executors scan Parquet partitions, compute local moment sums, shuffle by minute and merge. The half-hour reduction makes chronological windows small. MLlib then runs parameterized estimator pipelines on the training frame.
 
-**What does the streaming checkpoint protect?** It retains source offsets, state and sink progress across query restarts. Window assignment uses exchange timestamps. A watermark bounds state retention and finalization. After restarting on the same checkpoint, previously committed files produce no new alerts or minute output.
+**What does the streaming checkpoint protect?** It retains source offsets, state and sink progress across query restarts. Window assignment uses exchange timestamps. A watermark bounds state retention and finalization. After restarting on the same checkpoint, the query consumes zero new rows and the sink retains one copy of each closed minute.
 
 **Can this system provide a warning at exactly :00 in production?** The retrospective experiment assumes prompt availability of trades and finalized minute bars. The replay validates aggregation with a two-minute watermark. Production would require a measured latency budget, provisional or delayed scoring policy, and monitoring against late corrections.
 
