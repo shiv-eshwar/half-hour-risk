@@ -38,8 +38,11 @@ def id_audit():
     return output
 
 
-def bars(spark, symbol):
+def bars(spark, symbol, *, interval=None):
     raw = spark.read.parquet(str(PARQUET / symbol))
+    if interval is not None:
+        start_minute, end_minute = interval
+        raw = raw.filter(F.col("ms").between(start_minute * 60000, end_minute * 60000 - 1))
     minute = F.floor(F.col("ms") / 60000).cast("long")
     good = ((F.pmod("ms", F.lit(60000)) == 0) & (F.col("close_ms") == F.col("ms") + 59999)
             & F.col("ms").between(START * 1000, END * 1000 - 1)
@@ -62,8 +65,8 @@ def near(x, y):
     return F.abs(x - y) <= F.lit(1e-5) + F.lit(1e-8) * F.abs(y)
 
 
-def minute_table(spark, tape_minutes, btc, eth):
-    calendar = spark.range(START // 60, END // 60).select(F.col("id").alias("minute"))
+def minute_table(spark, tape_minutes, btc, eth, *, interval=(START // 60, END // 60)):
+    calendar = spark.range(*interval).select(F.col("id").alias("minute"))
     prices = calendar.join(btc, "minute", "left").join(eth, "minute", "left")
     previous = prices.select((F.col("minute") + 1).alias("minute"),
                              F.col("btc_close").alias("prior_b"), F.col("eth_close").alias("prior_e"))
@@ -89,18 +92,16 @@ def blocks(mins):
                                               "eth_buy_quote", "prints", "sum_sq", "sum_signed_sq", "tape_quote")]))
 
 
-def examples(frame):
+def issue_features(frame):
     # Only 48 blocks per day reach this ordered window after distributed reduction.
     seq = Window.orderBy("block")
-    day = seq.rowsBetween(-47, 0)
+    day = seq.rangeBetween(-47, 0)
     history = (frame.withColumn("issue_s", (F.col("block") + 1) * 1800)
-               .withColumn("target_rv", F.lead("rv").over(seq))
-               .withColumn("target_n", F.lead("btc_returns").over(seq))
                .withColumn("complete_history", F.sum((F.col("btc_returns") == 30).cast("int")).over(day))
                .withColumn("rv6h", F.avg("rv").over(seq.rowsBetween(-11, 0)))
                .withColumn("rv24h", F.avg("rv").over(day)))
     h = (history.filter((F.col("complete_history") == 48) & (F.col("eth_returns") == 30)
-                        & (F.col("matched_minutes") == 30) & (F.col("target_n") == 30))
+                        & (F.col("matched_minutes") == 30))
          .filter((F.col("btc_quote") > 0) & (F.col("eth_quote") > 0) & (F.col("sum_sq") > 0)))
     signed = 2 * F.col("btc_buy_quote") / F.col("btc_quote") - 1
     quad = F.col("sum_signed_sq") / F.col("sum_sq")
@@ -109,7 +110,7 @@ def examples(frame):
     def log_rv(col):
         return F.log(F.greatest(F.col(col), F.lit(1e-14)))
 
-    return (h.select("issue_s", "target_rv", F.col("rv").alias("past_rv"), "rv24h",
+    return h.select("issue_s", F.col("rv").alias("past_rv"), "rv24h",
                      log_rv("rv").alias("log_rv30"), log_rv("rv6h").alias("log_rv6h"),
                      log_rv("rv24h").alias("log_rv24h"), F.abs("btc_ret").alias("btc_abs_return"),
                      F.log1p("btc_quote").alias("btc_log_quote"), F.log1p("btc_trades").alias("btc_log_trades"),
@@ -122,6 +123,12 @@ def examples(frame):
                      F.dayofweek(F.timestamp_seconds("issue_s")).isin(1, 7).cast("double").alias("weekend"),
                      F.log(F.col("prints") * F.col("sum_sq") / F.col("tape_quote") ** 2).alias("log_concentration"),
                      quad.alias("quadratic_imbalance"), F.abs(quad - signed).alias("imbalance_gap"))
+
+
+def examples(frame):
+    targets = frame.filter(F.col("btc_returns") == 30).select(
+        (F.col("block") * 1800).alias("issue_s"), F.col("rv").alias("target_rv"))
+    return (issue_features(frame).join(targets, "issue_s")
             .withColumn("split", F.when(F.col("issue_s") < APR, "train")
                         .when(F.col("issue_s") < MAY, "validation").otherwise("test")))
 

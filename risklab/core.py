@@ -40,10 +40,10 @@ def write_json(path, data):
     temp.replace(path)
 
 
-def read_tape(spark, months=6):
+def read_tape(spark, months=6, *, first_month=1):
     # Attach source-month bounds once per file so row validation uses integer comparisons.
     parts = []
-    for month in range(1, months + 1):
+    for month in range(first_month, months + 1):
         date = f"2024-{month:02}"
         lo = epoch(f"{date}-01") * 1000
         hi = epoch(f"2024-{month + 1:02}-01") * 1000

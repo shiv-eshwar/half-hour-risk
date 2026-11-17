@@ -5,7 +5,9 @@ from pyspark.sql import functions as F
 
 from risklab.core import START, moments, spark_session, trade_values
 from risklab.evaluate import alert_cutoff, average_precision, paired_days
-from risklab.panel import BARS, TAPE, examples
+from risklab.panel import BARS, TAPE, examples, issue_features
+from risklab.predict import issue_time
+from argparse import ArgumentTypeError
 
 
 class EvaluationTest(unittest.TestCase):
@@ -14,6 +16,12 @@ class EvaluationTest(unittest.TestCase):
         self.assertAlmostEqual(average_precision([1, 0, 1], [2, 1, 1]), (1 + 2 / 3) / 2)
         self.assertIsNone(average_precision([0, 0], [1, 2]))
         self.assertEqual(alert_cutoff([0, 0, 0, 1]), 1)
+
+    def test_only_post_selection_half_hours_in_the_archive_can_be_issued(self):
+        self.assertEqual(issue_time("2024-07-01T00:00Z"), issue_time("2024-06-30T20:00-04:00"))
+        for invalid in ("2024-04-30T23:30Z", "2024-07-01T00:30Z", "2024-06-11T10:01Z", "2024-06-11T10:00"):
+            with self.subTest(invalid=invalid), self.assertRaises(ArgumentTypeError):
+                issue_time(invalid)
 
     def test_pairing_identical_models(self):
         y = [0, 1, 1, 0]
@@ -53,6 +61,9 @@ class TimeAndTapeTest(unittest.TestCase):
         shock = first + 49
         issue = shock * 1800
         normal = examples(blocks).filter(F.col("issue_s") == issue).first()
+        available = issue_features(blocks.filter(F.col("block") < shock)).filter(F.col("issue_s") == issue).first()
+        self.assertNotIn("target_rv", available.asDict())
+        self.assertEqual([normal[k] for k in BARS + TAPE], [available[k] for k in BARS + TAPE])
         changed = blocks.withColumn("rv", F.when(F.col("block") == shock, 0.5).otherwise(F.col("rv")))
         observation = examples(changed).filter(F.col("issue_s") == issue).first()
         self.assertEqual(observation.target_rv, 0.5)

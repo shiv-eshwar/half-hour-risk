@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+if [[ -z "${JAVA_HOME:-}" && -x /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home/bin/java ]]; then
+  export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+fi
+.venv/bin/python -m risklab.acquire
+scripts/run prepare
+scripts/run train
+SHUFFLE_PARTITIONS=8 scripts/run replay
+scripts/benchmarks
+uv run --no-project --python .venv/bin/python --with matplotlib==3.9.4 --with numpy==1.26.4 scripts/plot_results.py
+scripts/run demo
+scripts/run predict --at 2024-07-01T00:00Z
+.venv/bin/python -m unittest discover -s tests -v
