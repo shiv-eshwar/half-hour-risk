@@ -58,6 +58,10 @@ For aggregate print i, let xᵢ = price × base quantity in USDT. Set sᵢ to +1
 
 The bars-only control includes BTC log variance over 30 minutes, six hours and 24 hours, absolute net log return, quote volume, count and taker imbalance. ETH contributes short-horizon variance, absolute return, quote volume and taker imbalance. A normalized BTC–ETH return cross-product measures contemporaneous co-movement. UTC clock and weekend features use the known issue time. [Feature implementation](risklab/panel.py)
 
+## From raw records to a warning
+
+At the requested issue time, the prediction command limits both bar feeds and the trade tape to timestamps strictly before the boundary. The batch study and the forecast command share the same function for past features. Training joins future realized variance to those features by the exact issue-time key. Prediction passes the features directly to the published Spark pipeline and compares its output with the frozen validation cutoff. [Implementation](risklab/predict.py)
+
 ## Where the work runs
 
 The monthly ZIP is a transport format with limited parallel scan options. Arrow converts each archive in bounded batches. Spark splits Parquet input across tasks. The minute aggregation has one narrow integer grouping key, and the thirty-minute grouping shrinks the data again. Only then does a single ordered window compute long lookbacks. Increasing executor count would not benefit that final small window much. The measured local timings and their interpretation belong in the [technical report](report.md).

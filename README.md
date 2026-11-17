@@ -12,6 +12,7 @@ The tape model scored **0.2162 average precision** on May–June, compared with 
 
 | Document | What it answers |
 | --- | --- |
+| [Submission report (PDF)](output/pdf/half-hour-risk.pdf) | Six-page report with the methods, held-out results, literature and distributed execution evidence |
 | [Technical report](report.md) | What was measured, which model performed best and how much the tape added |
 | [Project brief](whatthis.md) | Business decision, novelty, limits and mapping to all 30 assessment marks |
 | [Literature](literature.md) | Closest Bitcoin volatility studies and the research gap |
@@ -31,3 +32,14 @@ uv venv --python 3.11
 uv pip install -r requirements.txt
 scripts/run demo
 ```
+
+
+## Score a market-data timestamp
+
+After verifying and converting the source archives with `.venv/bin/python -m risklab.acquire`, run an archived forecast directly from the previous day’s minute bars and the preceding half-hour of BTC trades.
+
+```bash
+scripts/run predict --at 2024-05-15T12:30Z
+```
+
+The command prints the target interval, score, alert cutoff and decision. Use `scripts/reproduce` to rebuild the full experiment from the pinned inputs, including the benchmarks and tests. [Engineering guide](engineering.md)

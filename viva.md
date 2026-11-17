@@ -6,7 +6,8 @@
 2. **Establish the scale.** Open the 18-file source manifest. Identify a single archive, its publisher digest, number of prints and corresponding BTC and ETH bars. Then show how many raw prints survive the validity audit and how many minutes reconcile. [Dataset card](datasets.md)
 3. **Trace the clock.** Show the 13:59 close feeding the last historical block and anchoring the first target return. The target completes at 14:30. Show the test that perturbs the future and leaves features identical. [Architecture](architecture.md) · [Tests](tests/test_study.py)
 4. **Load the model.** Run `scripts/run demo` from a fresh checkout after installing the core requirements. It loads the published MLlib pipeline, scores the saved feature vectors and prints the warning decision and eventual outcome. The examples are selected after evaluation to illustrate a warning and, when available, the largest missed event.
-5. **Defend the result.** Use the held-out precision–recall figure, the matched feature ablation and its uncertainty interval. Show how the raw workload scales and how many late deliveries the checkpoint replay handled. [Technical report](report.md)
+5. **Issue a forecast from market records.** With the source archives prepared, run `scripts/run predict --at 2024-07-01T00:00Z`. The selected model must give a score using June data alone. Explain why no realized outcome appears in the output.
+6. **Defend the result.** Use the held-out precision–recall figure, the matched feature ablation and its uncertainty interval. Show how the raw workload scales and how many late deliveries the checkpoint replay handled. [Technical report](report.md)
 
 ## Likely examiner questions
 

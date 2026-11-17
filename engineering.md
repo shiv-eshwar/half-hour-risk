@@ -15,6 +15,19 @@ SHUFFLE_PARTITIONS=8 scripts/run replay
 
 The acquisition command verifies every compressed file against the publisher and [pinned manifest](sources/manifest.json). It reuses verified inputs, stages new downloads under temporary names and atomically renames completed files. A changed publisher digest stops acquisition. The optional manifest-recording flag is for creating a new study snapshot. A source revision calls for a new recorded experiment.
 
+After the environment setup, `scripts/reproduce` runs acquisition, preparation, training, replay, all six benchmarks, figure generation, both forms of model demonstration and the regression tests. The script writes artifacts to the current checkout. Use a separate checkout when comparing a new run with the published reference.
+
+## Forecast directly from market records
+
+```bash
+scripts/run predict --at 2024-05-01T07:30Z
+scripts/run predict --at 2024-07-01T00:00Z
+```
+
+This path requires the normalized publisher archives from the acquisition stage and the published model and validation cutoffs. It reads BTC/ETH bars for the 1,441 minutes immediately preceding the chosen boundary and BTC prints for its preceding half-hour. The additional starting close anchors the first of 1,440 returns. It reconstructs the same features as training and emits one JSON warning. A gap in required history or a failed tape reconciliation prevents issuance. The output can be produced at the last archive boundary, before its target can be measured.
+
+The supported range starts at 00:00 UTC on May 1, after April model selection, and ends at 00:00 UTC on July 1. Issue times must be on a half-hour boundary and include a timezone offset. [Prediction code](risklab/predict.py)
+
 ## Stage contracts
 
 | Command | Reads | Produces |
@@ -22,6 +35,7 @@ The acquisition command verifies every compressed file against the publisher and
 | acquire | Eighteen publisher ZIPs and checksum sidecars | Verified ZIPs in data/raw and typed Parquet in data/parquet, grouped by tape, BTCUSDT and ETHUSDT |
 | prepare | Normalized Parquet and source manifest | Minute statistics in runs/tape_minutes, forecast panel in runs/panel and results/data_quality.json |
 | train | Forecast panel | Fitted Spark PipelineModels in runs/models, validation choices, holdout metrics, cases and compressed per-window forecasts in results |
+| predict --at | Prior BTC prints and BTC/ETH bars, published model and cutoff | One timestamped warning as JSON |
 | replay | January BTC tape | A fresh run directory for the inbox, state checkpoint and Parquet sink, plus results/streaming.json |
 | demo | Published model ZIP and case feature vectors | Recomputed MLlib scores for use in the viva |
 | benchmark | The first N normalized tape months | One timing record per input-size, local-thread and shuffle combination in results/scaling |
@@ -62,3 +76,5 @@ The replay takes 60 minutes of real January trades plus a three-minute closing b
 ```
 
 Set JAVA_HOME first when Java is outside the system search path. The published-ledger test reconstructs the confusion counts and AP for every held-out candidate. Additional tests cover average-precision ties, identical paired predictions, taker direction, equal ordinary bars with different squared moments, future-label isolation, and gaps in a future return window. To regenerate the report figure, install matplotlib 3.9.4 in the same environment and run `.venv/bin/python scripts/plot_results.py`. Cross-checks against the complete published BTC kline archive and the replay supplement these fixtures.
+
+The printable submission report is built from the Markdown study, literature review, feature definitions and published figure. Regenerate it with `uv run --script scripts/build_report.py`. [Submission PDF](output/pdf/half-hour-risk.pdf)
