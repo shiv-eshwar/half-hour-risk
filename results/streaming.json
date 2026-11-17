@@ -1,0 +1,118 @@
+{
+  "start_utc": "2024-01-11T14:00:00Z",
+  "evaluated_minutes": 60,
+  "buffer_minutes": 3,
+  "watermark_minutes": 2,
+  "events_including_buffer": 314003,
+  "evaluated_prints": 304952,
+  "delivery_delay_seconds": 45,
+  "delayed_delivery_events": 28545,
+  "delivered_in_later_batch": 2959,
+  "different_integer_windows": 0,
+  "max_scaled_moment_error": 2.0846602208475563e-14,
+  "dropped_by_watermark": 0,
+  "query_progress_by_start": [
+    [
+      {
+        "batch_id": 0,
+        "input_rows": 21580,
+        "watermark": "1970-01-01T00:00:00.000Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 1,
+        "input_rows": 24004,
+        "watermark": "2024-01-11T14:02:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 2,
+        "input_rows": 9655,
+        "watermark": "2024-01-11T14:07:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 3,
+        "input_rows": 14934,
+        "watermark": "2024-01-11T14:12:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 4,
+        "input_rows": 15287,
+        "watermark": "2024-01-11T14:17:59.998Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 5,
+        "input_rows": 14291,
+        "watermark": "2024-01-11T14:22:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 6,
+        "input_rows": 0,
+        "watermark": "2024-01-11T14:27:59.999Z",
+        "dropped_by_watermark": 0
+      }
+    ],
+    [
+      {
+        "batch_id": 7,
+        "input_rows": 24575,
+        "watermark": "2024-01-11T14:27:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 8,
+        "input_rows": 33022,
+        "watermark": "2024-01-11T14:32:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 9,
+        "input_rows": 40475,
+        "watermark": "2024-01-11T14:37:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 10,
+        "input_rows": 42587,
+        "watermark": "2024-01-11T14:42:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 11,
+        "input_rows": 28987,
+        "watermark": "2024-01-11T14:47:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 12,
+        "input_rows": 35406,
+        "watermark": "2024-01-11T14:52:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 13,
+        "input_rows": 9200,
+        "watermark": "2024-01-11T14:57:59.999Z",
+        "dropped_by_watermark": 0
+      },
+      {
+        "batch_id": 14,
+        "input_rows": 0,
+        "watermark": "2024-01-11T15:00:59.999Z",
+        "dropped_by_watermark": 0
+      }
+    ],
+    [
+      {
+        "batch_id": 15,
+        "input_rows": 0,
+        "watermark": "2024-01-11T15:00:59.999Z",
+        "dropped_by_watermark": 0
+      }
+    ]
+  ]
+}
