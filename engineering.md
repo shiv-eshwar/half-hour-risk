@@ -2,7 +2,7 @@
 
 ## Reproduce the study
 
-Run the following commands from the repository root. Use Python 3.11, a Java 17 JDK, and curl. The pinned runtime uses PySpark 3.5.3, NumPy and PyArrow. The launcher detects Homebrew's Java 17 on Apple Silicon. On other systems set JAVA_HOME to the installed JDK. Allow roughly 15 GB of working disk for source ZIPs, normalized data and Spark temporary files.
+Run the following commands from the repository root. Use Python 3.11, a Java 17 JDK, and curl. The pinned runtime uses PySpark 3.5.3, NumPy, pandas and PyArrow. The launcher detects Homebrew's Java 17 on Apple Silicon. On other systems set JAVA_HOME to the installed JDK. Allow roughly 15 GB of working disk for source ZIPs, normalized data and Spark temporary files.
 
 ```bash
 uv venv --python 3.11
