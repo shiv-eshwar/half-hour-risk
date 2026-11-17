@@ -1,0 +1,212 @@
+{
+  "train_stress_threshold": 4.2813633821949743e-05,
+  "train_regime_median": 1.3612524533709784e-05,
+  "train_windows": 4319,
+  "train_events": 432,
+  "settings": {
+    "bars_logistic_0.01": {
+      "group": "bars",
+      "family": "logistic",
+      "parameter": 0.01
+    },
+    "tape_logistic_0.01": {
+      "group": "tape",
+      "family": "logistic",
+      "parameter": 0.01
+    },
+    "bars_logistic_0.1": {
+      "group": "bars",
+      "family": "logistic",
+      "parameter": 0.1
+    },
+    "tape_logistic_0.1": {
+      "group": "tape",
+      "family": "logistic",
+      "parameter": 0.1
+    },
+    "bars_gbt_2": {
+      "group": "bars",
+      "family": "gbt",
+      "parameter": 2
+    },
+    "tape_gbt_2": {
+      "group": "tape",
+      "family": "gbt",
+      "parameter": 2
+    },
+    "bars_gbt_4": {
+      "group": "bars",
+      "family": "gbt",
+      "parameter": 4
+    },
+    "tape_gbt_4": {
+      "group": "tape",
+      "family": "gbt",
+      "parameter": 4
+    }
+  },
+  "validation": {
+    "persistence": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.5124069541414088,
+      "alert_cutoff": 4.263009417419607e-05,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 69,
+      "fp": 74,
+      "fn": 73,
+      "tn": 1224,
+      "precision": 0.4825174825174825,
+      "recall": 0.4859154929577465,
+      "false_alerts_per_day": 2.466666666666667,
+      "brier": null
+    },
+    "bars_logistic_0.01": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.5189747608152787,
+      "alert_cutoff": 0.2948309975510328,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 67,
+      "fp": 76,
+      "fn": 75,
+      "tn": 1222,
+      "precision": 0.46853146853146854,
+      "recall": 0.47183098591549294,
+      "false_alerts_per_day": 2.533333333333333,
+      "brier": 0.06562276073253515
+    },
+    "tape_logistic_0.01": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.5182532388885095,
+      "alert_cutoff": 0.30116656604104175,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 68,
+      "fp": 75,
+      "fn": 74,
+      "tn": 1223,
+      "precision": 0.4755244755244755,
+      "recall": 0.4788732394366197,
+      "false_alerts_per_day": 2.5,
+      "brier": 0.06580353398374847
+    },
+    "bars_logistic_0.1": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.5066902922857847,
+      "alert_cutoff": 0.25467313838629513,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 68,
+      "fp": 75,
+      "fn": 74,
+      "tn": 1223,
+      "precision": 0.4755244755244755,
+      "recall": 0.4788732394366197,
+      "false_alerts_per_day": 2.5,
+      "brier": 0.06593666103650517
+    },
+    "tape_logistic_0.1": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.5061563371191848,
+      "alert_cutoff": 0.26406271672479675,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 68,
+      "fp": 75,
+      "fn": 74,
+      "tn": 1223,
+      "precision": 0.4755244755244755,
+      "recall": 0.4788732394366197,
+      "false_alerts_per_day": 2.5,
+      "brier": 0.06586574029084401
+    },
+    "bars_gbt_2": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.4957210477430905,
+      "alert_cutoff": 0.26123950900289505,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 68,
+      "fp": 75,
+      "fn": 74,
+      "tn": 1223,
+      "precision": 0.4755244755244755,
+      "recall": 0.4788732394366197,
+      "false_alerts_per_day": 2.5,
+      "brier": 0.06932033367218435
+    },
+    "tape_gbt_2": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.4952810021437259,
+      "alert_cutoff": 0.2613072973584003,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 68,
+      "fp": 75,
+      "fn": 74,
+      "tn": 1223,
+      "precision": 0.4755244755244755,
+      "recall": 0.4788732394366197,
+      "false_alerts_per_day": 2.5,
+      "brier": 0.06956082064020862
+    },
+    "bars_gbt_4": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.46850229684967093,
+      "alert_cutoff": 0.31271490892445863,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 71,
+      "fp": 72,
+      "fn": 71,
+      "tn": 1226,
+      "precision": 0.4965034965034965,
+      "recall": 0.5,
+      "false_alerts_per_day": 2.4,
+      "brier": 0.06874113690322639
+    },
+    "tape_gbt_4": {
+      "windows": 1440,
+      "events": 142,
+      "prevalence": 0.09861111111111111,
+      "average_precision": 0.46450742106966014,
+      "alert_cutoff": 0.27854066881983497,
+      "alerts": 143,
+      "alert_rate": 0.09930555555555555,
+      "tp": 64,
+      "fp": 79,
+      "fn": 78,
+      "tn": 1219,
+      "precision": 0.44755244755244755,
+      "recall": 0.4507042253521127,
+      "false_alerts_per_day": 2.6333333333333333,
+      "brier": 0.07077772067463764
+    }
+  },
+  "best_by_family": {
+    "bars_logistic": "bars_logistic_0.01",
+    "bars_gbt": "bars_gbt_2",
+    "tape_logistic": "tape_logistic_0.01",
+    "tape_gbt": "tape_gbt_2"
+  },
+  "selected_tape": "tape_logistic_0.01",
+  "selected_bars": "bars_logistic_0.01",
+  "matched_twin": "bars_logistic_0.01"
+}

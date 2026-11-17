@@ -4,6 +4,10 @@
 
 A quantitative finance end-semester project using **243,917,258 Binance BTC/USDT spot aggregate trades**, six months of BTC and ETH minute bars, Apache Spark MLlib and Structured Streaming. At every UTC half-hour boundary, the model scores the next thirty minutes for unusual realized variance. The matched comparison tests whether trade-level information buys a better warning than ordinary bars alone. [Project brief](whatthis.md)
 
+The tape model scored **0.2162 average precision** on May–June, compared with **0.2076** for the same logistic model using bars alone and **0.1772** for volatility persistence. With cutoffs fixed in April, the tape model caught 23 of 83 stress windows and raised 62 false alarms. Bars alone caught 24 and raised 65 false alarms. [Results and uncertainty](report.md)
+
+![Held-out precision–recall comparison](results/precision-recall.png)
+
 ## Read the project
 
 | Document | What it answers |
