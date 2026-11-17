@@ -1,0 +1,116 @@
+{
+  "trade_rows": 243917258,
+  "id_checks": [
+    {
+      "month": "2024-01",
+      "rows": 41962464,
+      "first_id": 2807759891,
+      "last_id": 2849722354,
+      "skipped_ids": 0
+    },
+    {
+      "month": "2024-02",
+      "rows": 37492760,
+      "first_id": 2849722355,
+      "last_id": 2887215114,
+      "skipped_ids": 0
+    },
+    {
+      "month": "2024-03",
+      "rows": 59681084,
+      "first_id": 2887215115,
+      "last_id": 2946896198,
+      "skipped_ids": 0
+    },
+    {
+      "month": "2024-04",
+      "rows": 44987078,
+      "first_id": 2946896199,
+      "last_id": 2991883276,
+      "skipped_ids": 0
+    },
+    {
+      "month": "2024-05",
+      "rows": 32019547,
+      "first_id": 2991883277,
+      "last_id": 3023902823,
+      "skipped_ids": 0
+    },
+    {
+      "month": "2024-06",
+      "rows": 27774325,
+      "first_id": 3023902824,
+      "last_id": 3051677148,
+      "skipped_ids": 0
+    }
+  ],
+  "dispositions": [
+    {
+      "month": "2024-01",
+      "status": "accepted",
+      "count": 41962464
+    },
+    {
+      "month": "2024-02",
+      "status": "accepted",
+      "count": 37492760
+    },
+    {
+      "month": "2024-03",
+      "status": "accepted",
+      "count": 59681084
+    },
+    {
+      "month": "2024-04",
+      "status": "accepted",
+      "count": 44987078
+    },
+    {
+      "month": "2024-05",
+      "status": "accepted",
+      "count": 32019547
+    },
+    {
+      "month": "2024-06",
+      "status": "accepted",
+      "count": 27774325
+    }
+  ],
+  "btc_bars": {
+    "rows": 262080,
+    "unique_minutes": 262080,
+    "invalid_rows": 0
+  },
+  "eth_bars": {
+    "rows": 262080,
+    "unique_minutes": 262080,
+    "invalid_rows": 0
+  },
+  "reconciliation": {
+    "expected_minutes": 262080,
+    "reconciled_btc_minutes": 262080,
+    "accepted_prints": 243917258,
+    "native_fills": 311557031,
+    "no_print_minutes": 0
+  },
+  "splits": [
+    {
+      "split": "train",
+      "windows": 4319,
+      "first_utc": "2024-01-02T00:30:00+00:00",
+      "last_utc": "2024-03-31T23:30:00+00:00"
+    },
+    {
+      "split": "validation",
+      "windows": 1440,
+      "first_utc": "2024-04-01T00:00:00+00:00",
+      "last_utc": "2024-04-30T23:30:00+00:00"
+    },
+    {
+      "split": "test",
+      "windows": 2928,
+      "first_utc": "2024-05-01T00:00:00+00:00",
+      "last_utc": "2024-06-30T23:30:00+00:00"
+    }
+  ]
+}

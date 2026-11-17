@@ -39,3 +39,9 @@ A monthly kline file includes 43,200 rows for a 30-day month. A trade file has o
 ## Scope and access
 
 The quote currency is USDT. BTC is the sole forecasting target and ETH is a feature source. The spot archive contains executed trades. It has no identities, outstanding order-book depth, cancellations, liquidation flags or real-time delivery receipts. The replay adds its own labeled delivery delay. The repository publishes links, checksums, code and derived evaluation artifacts; the large original inputs are fetched from the publisher. [Public data repository](https://github.com/binance/binance-public-data)
+
+## What passed the full-data checks
+
+All 243,917,258 aggregate-trade records passed the validity rules. Their IDs increased continuously from 2,807,759,891 through 3,051,677,148. Together they represent 311,557,031 underlying fills. Both bar series contained 262,080 distinct valid UTC minutes. Every BTC minute reconciled on the close, fill count and two quote-volume measures.
+
+The forecast panel contains 4,319 training, 1,440 validation and 2,928 test windows. The first 49 candidate issue times are unavailable because the first minute has no preceding close in the selected archive and the model needs a full day of valid past returns. The first scored window begins on 2 January at 00:30 UTC. [Executed quality audit](results/data_quality.json)
